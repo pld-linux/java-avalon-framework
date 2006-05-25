@@ -5,9 +5,9 @@ Version:	4.3
 Release:	0.1
 License:	Apache v2.0
 Group:		Libraries
-Source0:	http://www.apache.org/dist/excalibur/%{name}/source/%{name}-api-%{version}-src.tar.gz
+Source0:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{name}-api-%{version}-src.tar.gz
 # Source0-md5:	9dd92ffe60d3375eb386cde18039acf1
-Source1:	http://www.apache.org/dist/excalibur/%{name}/source/%{name}-impl-%{version}-src.tar.gz
+Source1:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{name}-impl-%{version}-src.tar.gz
 # Source1-md5:	8b792355d6719ab4f02dc6a59fc21dcc
 URL:		http://excalibur.apache.org/framework/
 BuildRequires:	ant >= 1.5
