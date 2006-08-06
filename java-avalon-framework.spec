@@ -11,6 +11,7 @@ Source1:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{name}-im
 # Source1-md5:	62499f9b32ac4d722a46a4f2cfbbf0d8
 URL:		http://excalibur.apache.org/framework/
 BuildRequires:	ant >= 1.5
+BuildRequires:	ant-nodeps
 BuildRequires:	jpackage-utils
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildArch:	noarch
@@ -31,14 +32,14 @@ ogólnych komponentów.
 
 %prep
 %setup -q -c -T
-# double gzip... sigh.
-zcat %{SOURCE0} | tar xz
-zcat %{SOURCE1} | tar xz
+tar xzf %{SOURCE0}
+tar xzf %{SOURCE1}
 
 %build
 required_jars='junit'
 export CLASSPATH="`/usr/bin/build-classpath $required_jars`"
 export JAVA_HOME=%{java_home}
+#export JAVA_HOME=/usr/lib/jvm/java-sun-1.5.0.06
 export JAVAC=%{javac}
 export JAVA=%{java}
 
@@ -55,7 +56,11 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javadir}
 
-# XXX
+install %{name}-impl-%{version}/target/%{name}-impl-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-impl-%{version}.jar
+install %{name}-api-%{version}/target/%{name}-api-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-api-%{version}.jar
+
+ln -sf %{name}-impl-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-impl.jar
+ln -sf %{name}-api-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-api.jar
 
 %clean
 rm -rf $RPM_BUILD_ROOT
