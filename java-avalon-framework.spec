@@ -45,7 +45,7 @@ export JAVA=%{java}
 
 # nope.  doesn't work.  nooo-way.
 cd %{name}-api-%{version}
-%{ant}
+%ant
 cd ..
 
 cd %{name}-impl-%{version}
