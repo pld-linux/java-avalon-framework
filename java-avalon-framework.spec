@@ -1,5 +1,5 @@
 Summary:	The Avalon Framework
-Summary(pl.UTF-8):   Szkielet Avalon
+Summary(pl.UTF-8):	Szkielet Avalon
 Name:		avalon-framework
 Version:	4.3
 Release:	0.1
