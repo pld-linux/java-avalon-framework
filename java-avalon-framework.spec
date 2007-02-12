@@ -1,5 +1,5 @@
 Summary:	The Avalon Framework
-Summary(pl):	Szkielet Avalon
+Summary(pl.UTF-8):   Szkielet Avalon
 Name:		avalon-framework
 Version:	4.3
 Release:	0.1
@@ -24,11 +24,11 @@ between commonly used application components, best-of-practice pattern
 enforcements, and several lightweight convenience implementations of
 the generic components.
 
-%description -l pl
-Avalon Framework sk³ada siê z interfejsów definiuj±cych powi±zania
-miêdzy powszechnie u¿ywanymi komponentami aplikacji, najlepszymi
+%description -l pl.UTF-8
+Avalon Framework skÅ‚ada siÄ™ z interfejsÃ³w definiujÄ…cych powiÄ…zania
+miÄ™dzy powszechnie uÅ¼ywanymi komponentami aplikacji, najlepszymi
 narzucanymi wzorami i kilkoma lekkimi wygodnymi implementacjami
-ogólnych komponentów.
+ogÃ³lnych komponentÃ³w.
 
 %prep
 %setup -q -c -T
