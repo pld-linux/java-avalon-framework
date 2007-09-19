@@ -41,8 +41,8 @@ required_jars='junit'
 export CLASSPATH="`/usr/bin/build-classpath $required_jars`"
 export JAVA_HOME=%{java_home}
 #export JAVA_HOME=/usr/lib/jvm/java-sun-1.5.0.06
-export JAVAC=%{javac}
-export JAVA=%{java}
+export JAVAC=%javac
+export JAVA=%java
 
 # nope.  doesn't work.  nooo-way.
 cd %{name}-api-%{version}
@@ -50,7 +50,7 @@ cd %{name}-api-%{version}
 cd ..
 
 cd %{name}-impl-%{version}
-%{ant}
+%ant
 cd ..
 
 %install
