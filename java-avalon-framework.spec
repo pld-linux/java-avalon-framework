@@ -46,11 +46,11 @@ export JAVA=%{java}
 
 # nope.  doesn't work.  nooo-way.
 cd %{name}-api-%{version}
-%ant
+%ant -lib `/usr/bin/build-classpath`
 cd ..
 
 cd %{name}-impl-%{version}
-%{ant}
+%{ant} -lib `/usr/bin/build-classpath`
 cd ..
 
 %install
