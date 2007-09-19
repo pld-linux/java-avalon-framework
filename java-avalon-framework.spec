@@ -13,6 +13,7 @@ URL:		http://excalibur.apache.org/framework/
 BuildRequires:	ant >= 1.5
 BuildRequires:	ant-nodeps
 BuildRequires:	jpackage-utils
+BuildRequires:	junit
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildArch:	noarch
 ExclusiveArch:	i586 i686 pentium3 pentium4 athlon %{x8664} noarch
