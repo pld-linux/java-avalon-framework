@@ -1,0 +1,11 @@
+--- avalon-framework-4.3/avalon-framework-impl-4.3/build.xml	2007-12-02 21:16:51.976988433 +0200
++++ avalon-framework-4.3-notest/avalon-framework-impl-4.3/build.xml	2007-12-02 21:16:08.278971670 +0200
+@@ -94,7 +94,7 @@
+       </fileset>
+     </copy>
+   </target>
+-  <target name="jar" description="o Create the jar" depends="compile,test">
++  <target name="jar" description="o Create the jar" depends="compile">
+     <jar jarfile="${defaulttargetdir}/${final.name}.jar" excludes="**/package.html" basedir="${classesdir}">
+     </jar>
+   </target>
