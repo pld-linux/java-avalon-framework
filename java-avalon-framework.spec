@@ -1,3 +1,10 @@
+# TODO
+# - chicken-egg: who was first, avalon-framework or avalon-logkit?
+#
+# Conditional build:
+%bcond_with	tests		# build and run tests
+#
+%include	/usr/lib/rpm/macros.java
 Summary:	The Avalon Framework
 Summary(pl.UTF-8):	Szkielet Avalon
 Name:		avalon-framework
@@ -9,12 +16,19 @@ Source0:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{name}-ap
 # Source0-md5:	d4cffb4ba1d07bdc517ac6e322636495
 Source1:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{name}-impl-%{version}-src.tar.gz
 # Source1-md5:	62499f9b32ac4d722a46a4f2cfbbf0d8
+Patch0:		%{name}-tests.patch
 URL:		http://excalibur.apache.org/framework/
 BuildRequires:	ant >= 1.5
+%{?with_tests:BuildRequires:	ant-junit}
 BuildRequires:	ant-nodeps
+BuildRequires:	avalon-logkit
+BuildRequires:	jakarta-commons-logging
 BuildRequires:	jpackage-utils
-BuildRequires:	junit
+%{?with_tests:BuildRequires:	junit}
+BuildRequires:	logging-log4j
+BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	sed >= 4.0
 BuildArch:	noarch
 ExclusiveArch:	i586 i686 pentium3 pentium4 athlon %{x8664} noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -33,35 +47,35 @@ ogólnych komponentów.
 
 %prep
 %setup -q -c -T
-tar xzf %{SOURCE0}
-tar xzf %{SOURCE1}
+%{__tar} -xzf %{SOURCE0}
+%{__tar} -xzf %{SOURCE1}
+%patch0 -p1
+
+# Fix for wrong-file-end-of-line-encoding problem
+find '(' -name '*.html' -o -name '*.css' -o -name '*.xml' ')' -print0 | xargs -0 sed -i -e 's,\r$,,'
 
 %build
-required_jars='junit'
-export CLASSPATH="`/usr/bin/build-classpath $required_jars`"
-export JAVA_HOME=%{java_home}
-#export JAVA_HOME=/usr/lib/jvm/java-sun-1.5.0.06
-export JAVAC=%javac
-export JAVA=%java
+required_jars="avalon-logkit %{?with_tests:junit}"
+export CLASSPATH=$(build-classpath $required_jars)
 
-# nope.  doesn't work.  nooo-way.
-cd %{name}-api-%{version}
-%ant
-cd ..
+%ant -f %{name}-api-%{version}/build.xml \
+	-Dnoget=1 \
+	dist %{?with_tests:test}
 
-cd %{name}-impl-%{version}
-%ant
-cd ..
+required_jars="avalon-logkit commons-logging log4j"
+export CLASSPATH=$(build-classpath $required_jars):$(pwd)/avalon-framework-api-4.3/target/avalon-framework-api-4.3.jar
+%ant -f %{name}-impl-%{version}/build.xml \
+	-Dnoget=1 \
+	dist %{?with_tests:test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_javadir}
-
-install %{name}-impl-%{version}/target/%{name}-impl-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-impl-%{version}.jar
-install %{name}-api-%{version}/target/%{name}-api-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-api-%{version}.jar
-
-ln -sf %{name}-impl-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-impl.jar
+cp -a %{name}-api-%{version}/target/%{name}-api-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-api-%{version}.jar
 ln -sf %{name}-api-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-api.jar
+
+cp -a %{name}-impl-%{version}/target/%{name}-impl-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-impl-%{version}.jar
+ln -sf %{name}-impl-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-impl.jar
 
 %clean
 rm -rf $RPM_BUILD_ROOT
