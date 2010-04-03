@@ -8,9 +8,9 @@ Summary:	The Avalon Framework
 Summary(pl.UTF-8):	Szkielet Avalon
 Name:		java-avalon-framework
 Version:	4.3
-Release:	0.1
+Release:	1
 License:	Apache v2.0
-Group:		Libraries
+Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{srcname}-api-%{version}-src.tar.gz
 # Source0-md5:	d4cffb4ba1d07bdc517ac6e322636495
 Source1:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{srcname}-impl-%{version}-src.tar.gz
@@ -30,6 +30,7 @@ BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
 Requires:	jpackage-utils
+Obsoletes:	avalon-framework
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
