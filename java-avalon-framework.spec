@@ -24,7 +24,8 @@ BuildRequires:	java-avalon-logkit
 BuildRequires:	java-commons-logging
 %{?with_tests:BuildRequires:	java-junit}
 BuildRequires:	java-log4j
-BuildRequires:	java-sun
+BuildRequires:	jdk
+BuildConflicts:	java-gcj-compat-devel
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
