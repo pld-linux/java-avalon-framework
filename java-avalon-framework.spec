@@ -25,11 +25,11 @@ BuildRequires:	java-commons-logging
 %{?with_tests:BuildRequires:	java-junit}
 BuildRequires:	java-log4j
 BuildRequires:	jdk
-BuildConflicts:	java-gcj-compat-devel
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sed >= 4.0
+BuildConflicts:	java-gcj-compat-devel
 Requires:	jpackage-utils
 Obsoletes:	avalon-framework
 BuildArch:	noarch
