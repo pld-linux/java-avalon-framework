@@ -27,7 +27,7 @@ BuildRequires:	java-log4j
 BuildRequires:	jdk
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
-BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	rpmbuild(macros) >= 1.553
 BuildRequires:	sed >= 4.0
 BuildConflicts:	java-gcj-compat-devel
 Requires:	jpackage-utils
@@ -53,7 +53,7 @@ ogólnych komponentów.
 %patch0 -p1
 
 # Fix for wrong-file-end-of-line-encoding problem
-find '(' -name '*.html' -o -name '*.css' -o -name '*.xml' ')' -print0 | xargs -0 sed -i -e 's,\r$,,'
+find '(' -name '*.html' -o -name '*.css' -o -name '*.xml' ')' -print0 | xargs -0 %undos
 
 %build
 required_jars="avalon-logkit %{?with_tests:junit}"
@@ -64,7 +64,7 @@ export CLASSPATH=$(build-classpath $required_jars)
 	dist %{?with_tests:test}
 
 required_jars="avalon-logkit commons-logging log4j"
-export CLASSPATH=$(build-classpath $required_jars):$(pwd)/avalon-framework-api-4.3/target/avalon-framework-api-4.3.jar
+export CLASSPATH=$(build-classpath $required_jars):$(pwd)/avalon-framework-api-%{version}/target/avalon-framework-api-%{version}.jar
 %ant -f %{srcname}-impl-%{version}/build.xml \
 	-Dnoget=1 \
 	dist %{?with_tests:test}
@@ -82,4 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_javadir}/*.jar
+%{_javadir}/%{srcname}-api.jar
+%{_javadir}/%{srcname}-api-%{version}.jar
+%{_javadir}/%{srcname}-impl.jar
+%{_javadir}/%{srcname}-impl-%{version}.jar
