@@ -48,9 +48,8 @@ narzucanymi wzorami i kilkoma lekkimi wygodnymi implementacjami
 ogólnych komponentów.
 
 %prep
-%setup -q -c -T
-%{__tar} -xzf %{SOURCE0}
-%{__tar} -xzf %{SOURCE1}
+%setup -q -c -a1
+
 %patch0 -p1
 
 # Fix for wrong-file-end-of-line-encoding problem
