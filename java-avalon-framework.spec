@@ -8,7 +8,7 @@ Summary:	The Avalon Framework
 Summary(pl.UTF-8):	Szkielet Avalon
 Name:		java-avalon-framework
 Version:	4.3
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries/Java
 Source0:	http://www.apache.org/dist/excalibur/avalon-framework/source/%{srcname}-api-%{version}-src.tar.gz
