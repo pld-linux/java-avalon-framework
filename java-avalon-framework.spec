@@ -3,7 +3,6 @@
 %bcond_with	tests		# build and run tests
 #
 %define		srcname	avalon-framework
-%include	/usr/lib/rpm/macros.java
 Summary:	The Avalon Framework
 Summary(pl.UTF-8):	Szkielet Avalon
 Name:		java-avalon-framework
