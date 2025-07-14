@@ -49,7 +49,7 @@ ogólnych komponentów.
 %prep
 %setup -q -c -a1
 
-%patch0 -p1
+%patch -P0 -p1
 
 # Fix for wrong-file-end-of-line-encoding problem
 find '(' -name '*.html' -o -name '*.css' -o -name '*.xml' ')' -print0 | xargs -0 %undos
